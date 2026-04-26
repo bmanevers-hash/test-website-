@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Café Noord – Amsterdam</title>
+  <title>Cafe Noord - Amsterdam</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --cream: #f5f0e8;
@@ -16,21 +20,32 @@
       --gold: #d4a853;
       --light-brown: #c8956b;
       --text-muted: #7a6055;
+      --hero-circle: #d8a63d;
       --section-gap: 100px;
+      --nav-height: 88px;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      font-family: 'Georgia', 'Times New Roman', serif;
+      font-family: "Georgia", "Times New Roman", serif;
       background: var(--warm-white);
       color: var(--espresso);
       line-height: 1.7;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       display: flex;
       justify-content: space-between;
@@ -57,58 +72,218 @@
     .nav-links a {
       color: var(--cream);
       text-decoration: none;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 0.85rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover {
+      color: var(--gold);
+    }
 
     #hero {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
+      justify-content: center;
+      padding: calc(var(--nav-height) + 40px) 60px 40px;
       background:
-        linear-gradient(to bottom, rgba(44, 26, 14, 0.6), rgba(44, 26, 14, 0.35)),
-        url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1600&q=80') center/cover no-repeat;
-      padding: 0 20px;
+        radial-gradient(circle at top right, rgba(212, 168, 83, 0.16), transparent 35%),
+        linear-gradient(180deg, #f8f1e8 0%, #f4ece1 100%);
+      overflow: hidden;
       position: relative;
     }
 
-    .hero-eyebrow {
-      font-family: 'Arial', sans-serif;
+    .hero-shell {
+      width: 100%;
+      max-width: 1280px;
+      min-height: calc(100vh - var(--nav-height) - 80px);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 30px;
+      position: relative;
+    }
+
+    .hero-top,
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-brand {
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--espresso);
+      font-weight: bold;
+    }
+
+    .hero-mini-nav {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .hero-mini-nav a,
+    .hero-socials a,
+    .hero-location,
+    .hero-side-copy a,
+    .hero-side-copy p {
+      font-family: Arial, sans-serif;
+    }
+
+    .hero-mini-nav a,
+    .hero-socials a {
+      color: rgba(44, 26, 14, 0.65);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .hero-mini-nav a:hover,
+    .hero-socials a:hover,
+    .hero-side-copy a:hover {
+      color: var(--espresso);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: 0.95fr 1.1fr 1fr;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .hero-side-copy {
+      max-width: 300px;
+      justify-self: start;
+      z-index: 2;
+      animation: fadeUp 0.8s ease 0.6s both;
+    }
+
+    .hero-side-copy p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+
+    .hero-side-copy a {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--espresso);
+      font-size: 0.84rem;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .hero-visual {
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: fadeIn 0.9s ease 0.15s both;
+    }
+
+    .hero-circle {
+      position: absolute;
+      width: min(38vw, 520px);
+      height: min(38vw, 520px);
+      border-radius: 50%;
+      background: rgba(216, 166, 61, 0.9);
+      box-shadow: 0 20px 60px rgba(181, 113, 58, 0.18);
+    }
+
+    .hero-image {
+      position: relative;
+      z-index: 1;
+      width: min(28vw, 360px);
+      transform: scale(1.18);
+      transform-origin: center;
+      filter: drop-shadow(0 24px 40px rgba(44, 26, 14, 0.18));
+    }
+
+    .hero-overlay {
+      justify-self: end;
+      text-align: left;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 0.8s ease 0.85s both;
+    }
+
+    .hero-overlay .hero-kicker {
+      display: block;
+      font-family: Arial, sans-serif;
       font-size: 0.8rem;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
+      color: var(--caramel);
+      margin-bottom: 12px;
     }
 
-    .hero-title {
-      font-size: clamp(3rem, 8vw, 6rem);
-      color: #fff;
-      font-weight: normal;
-      line-height: 1.05;
-      margin-bottom: 24px;
+    .hero-overlay h1 {
+      font-size: clamp(3.8rem, 9vw, 8.8rem);
+      line-height: 0.92;
+      font-weight: bold;
+      color: var(--espresso);
     }
 
-    .hero-title em {
+    .hero-overlay h1 em {
       color: var(--gold);
       font-style: normal;
     }
 
-    .hero-sub {
-      font-family: 'Arial', sans-serif;
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.85);
-      max-width: 480px;
-      margin-bottom: 44px;
-      letter-spacing: 0.3px;
+    .hero-bottom {
+      padding-bottom: 10px;
+    }
+
+    .hero-socials {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-location {
+      color: rgba(44, 26, 14, 0.8);
+      font-size: 0.92rem;
+      letter-spacing: 0.6px;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(44, 26, 14, 0.45);
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .hero-scroll::after {
+      content: "";
+      width: 1px;
+      height: 40px;
+      background: rgba(44, 26, 14, 0.25);
+      animation: scrollPulse 2s ease-in-out infinite;
     }
 
     .btn {
@@ -117,7 +292,7 @@
       border: 2px solid var(--gold);
       color: var(--gold);
       text-decoration: none;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 0.85rem;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -129,39 +304,45 @@
       color: var(--espresso);
     }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.6);
-      font-family: 'Arial', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .hero-scroll::after {
-      content: '';
-      width: 1px;
-      height: 40px;
-      background: rgba(255,255,255,0.4);
-      animation: scrollPulse 2s ease-in-out infinite;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.92);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     @keyframes scrollPulse {
-      0%, 100% { opacity: 0.4; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(0.6); }
+      0%, 100% {
+        opacity: 0.4;
+        transform: scaleY(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scaleY(0.6);
+      }
     }
 
-    section { padding: var(--section-gap) 60px; }
+    section {
+      padding: var(--section-gap) 60px;
+    }
 
     .section-label {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 0.75rem;
       letter-spacing: 4px;
       text-transform: uppercase;
@@ -201,11 +382,10 @@
       width: 100%;
       height: 500px;
       object-fit: cover;
-      display: block;
     }
 
     .about-image::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       border: 2px solid var(--gold);
@@ -225,7 +405,9 @@
       color: var(--cream);
     }
 
-    #menu .section-title { color: var(--cream); }
+    #menu .section-title {
+      color: var(--cream);
+    }
 
     .menu-grid {
       display: grid;
@@ -239,7 +421,7 @@
       letter-spacing: 1px;
       margin-bottom: 24px;
       padding-bottom: 12px;
-      border-bottom: 1px solid rgba(212,168,83,0.3);
+      border-bottom: 1px solid rgba(212, 168, 83, 0.3);
     }
 
     .menu-item {
@@ -247,29 +429,36 @@
       justify-content: space-between;
       align-items: baseline;
       padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
 
-    .menu-item:last-child { border-bottom: none; }
+    .menu-item:last-child {
+      border-bottom: none;
+    }
 
-    .menu-item-name { font-size: 0.95rem; color: var(--cream); }
+    .menu-item-name {
+      font-size: 0.95rem;
+      color: var(--cream);
+    }
 
     .menu-item-desc {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 0.78rem;
-      color: rgba(245,240,232,0.5);
+      color: rgba(245, 240, 232, 0.5);
       margin-top: 2px;
     }
 
     .menu-item-price {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 0.88rem;
       color: var(--gold);
       white-space: nowrap;
       margin-left: 16px;
     }
 
-    .menu-item-left { flex: 1; }
+    .menu-item-left {
+      flex: 1;
+    }
 
     #hours {
       display: grid;
@@ -279,29 +468,39 @@
       background: var(--cream);
     }
 
-    .hours-table { width: 100%; max-width: 420px; }
+    .hours-table {
+      width: 100%;
+      max-width: 420px;
+    }
 
     .hours-row {
       display: flex;
       justify-content: space-between;
       padding: 14px 0;
-      border-bottom: 1px solid rgba(92,61,46,0.15);
-      font-family: 'Arial', sans-serif;
+      border-bottom: 1px solid rgba(92, 61, 46, 0.15);
+      font-family: Arial, sans-serif;
       font-size: 0.92rem;
     }
 
-    .hours-row:last-child { border-bottom: none; }
+    .hours-row:last-child {
+      border-bottom: none;
+    }
 
-    .hours-day { color: var(--brown); font-weight: bold; }
-    .hours-time { color: var(--text-muted); }
-    .hours-closed { color: var(--caramel); font-style: italic; }
+    .hours-day {
+      color: var(--brown);
+      font-weight: bold;
+    }
+
+    .hours-time {
+      color: var(--text-muted);
+    }
 
     .hours-note {
       margin-top: 28px;
       padding: 20px 24px;
-      background: rgba(212,168,83,0.12);
+      background: rgba(212, 168, 83, 0.12);
       border-left: 3px solid var(--gold);
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 0.85rem;
       color: var(--text-muted);
       max-width: 420px;
@@ -326,7 +525,7 @@
     }
 
     .contact-block h4 {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 0.75rem;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -334,7 +533,8 @@
       margin-bottom: 14px;
     }
 
-    .contact-block p, .contact-block a {
+    .contact-block p,
+    .contact-block a {
       font-size: 0.97rem;
       color: var(--text-muted);
       text-decoration: none;
@@ -342,7 +542,9 @@
       line-height: 1.8;
     }
 
-    .contact-block a:hover { color: var(--caramel); }
+    .contact-block a:hover {
+      color: var(--caramel);
+    }
 
     .map-embed {
       margin-top: 60px;
@@ -364,42 +566,133 @@
 
     footer {
       background: var(--espresso);
-      color: rgba(245,240,232,0.5);
+      color: rgba(245, 240, 232, 0.5);
       text-align: center;
       padding: 40px 60px;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 0.82rem;
       letter-spacing: 0.5px;
     }
 
-    footer span { color: var(--gold); }
+    footer span {
+      color: var(--gold);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .hero-side-copy,
+      .hero-overlay {
+        justify-self: center;
+        text-align: center;
+      }
+
+      .hero-visual {
+        order: -1;
+        min-height: 420px;
+      }
+
+      .hero-side-copy {
+        max-width: 560px;
+      }
+    }
 
     @media (max-width: 900px) {
-      nav { padding: 18px 24px; }
-      .nav-links { gap: 24px; }
-      section { padding: 70px 24px; }
+      nav {
+        padding: 18px 24px;
+      }
 
-      #about, #hours {
+      .nav-links {
+        gap: 24px;
+      }
+
+      #hero,
+      section,
+      footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      section {
+        padding-top: 70px;
+        padding-bottom: 70px;
+      }
+
+      #about,
+      #hours {
         grid-template-columns: 1fr;
         gap: 40px;
       }
 
-      .about-image::after { display: none; }
-      .about-image img { height: 320px; }
-      .hours-image { order: -1; }
-      .hours-image img { height: 260px; }
+      .about-image::after {
+        display: none;
+      }
+
+      .about-image img {
+        height: 320px;
+      }
+
+      .hours-image {
+        order: -1;
+      }
+
+      .hours-image img {
+        height: 260px;
+      }
+
+      .hero-top,
+      .hero-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-circle {
+        width: min(72vw, 420px);
+        height: min(72vw, 420px);
+      }
+
+      .hero-image {
+        width: min(46vw, 270px);
+      }
     }
 
     @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .hero-title { font-size: 2.6rem; }
+      .nav-links,
+      .hero-mini-nav {
+        display: none;
+      }
+
+      #hero {
+        padding-top: calc(var(--nav-height) + 12px);
+      }
+
+      .hero-shell {
+        gap: 18px;
+      }
+
+      .hero-visual {
+        min-height: 320px;
+      }
+
+      .hero-overlay h1 {
+        font-size: clamp(3rem, 18vw, 4.6rem);
+      }
+
+      .hero-location,
+      .hero-socials {
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
-
   <nav>
-    <a href="#hero" class="nav-logo">CAFÉ NOORD</a>
+    <a href="#hero" class="nav-logo">CAFE NOORD</a>
     <ul class="nav-links">
       <li><a href="#about">Over ons</a></li>
       <li><a href="#menu">Menu</a></li>
@@ -409,26 +702,78 @@
   </nav>
 
   <section id="hero">
-    <p class="hero-eyebrow">Amsterdam Noord · Specialty Coffee</p>
-    <h1 class="hero-title">Welkom bij<br><em>Café Noord</em></h1>
-    <p class="hero-sub">Authentieke koffie, warme sfeer en de beste taarten van het Noorden. Kom erbij zitten.</p>
-    <a href="#menu" class="btn">Bekijk ons menu</a>
-    <div class="hero-scroll">Scroll</div>
+    <div class="hero-shell">
+      <div class="hero-top">
+        <div class="hero-brand">Cafe Noord</div>
+        <div class="hero-mini-nav">
+          <a href="#about">Verhaal</a>
+          <a href="#menu">Menu</a>
+          <a href="#hours">Tijden</a>
+          <a href="#contact">Locatie</a>
+        </div>
+      </div>
+
+      <div class="hero-main">
+        <div class="hero-side-copy">
+          <p>
+            Authentieke koffie, warme sfeer en de beste taarten van het Noorden.
+            Een rustige plek in Amsterdam Noord om even te landen.
+          </p>
+          <a href="#about">Lees meer</a>
+          <div style="margin-top: 28px;">
+            <a href="#menu" class="btn">Bekijk ons menu</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-circle"></div>
+          <img
+            class="hero-image"
+            src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=900&q=80"
+            alt="Koffie van Cafe Noord"
+          />
+        </div>
+
+        <div class="hero-overlay">
+          <span class="hero-kicker">Amsterdam Noord · Specialty Coffee</span>
+          <h1>Welkom<br><em>Noord</em></h1>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="hero-socials">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="mailto:hallo@cafenoord.nl">E-mail</a>
+        </div>
+        <div class="hero-location">Nieuwendammerdijk 42, Amsterdam Noord</div>
+      </div>
+
+      <div class="hero-scroll">Scroll</div>
+    </div>
   </section>
 
   <section id="about">
     <div class="about-image">
       <img
         src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=900&q=80"
-        alt="Interieur van Café Noord"
+        alt="Interieur van Cafe Noord"
       />
     </div>
     <div class="about-text">
       <p class="section-label">Ons verhaal</p>
-      <h2 class="section-title">Een plek om<br>thuis te komen</h2>
+      <h2 class="section-title">Een plek om<br />thuis te komen</h2>
       <div class="section-divider"></div>
-      <p>Café Noord opende zijn deuren in 2019 met één simpel doel: een plek creëren waar buurtbewoners en bezoekers even kunnen vertragen. Midden in het bruisende Amsterdam Noord, op loopafstand van het IJ-veer.</p>
-      <p>Wij werken uitsluitend met specialty koffie van kleinschalige boerderijen en verse, ambachtelijke ingrediënten. Elke dag gebakken, nooit ingevroren.</p>
+      <p>
+        Cafe Noord opende zijn deuren in 2019 met een simpel doel: een plek
+        creeren waar buurtbewoners en bezoekers even kunnen vertragen. Midden in
+        het bruisende Amsterdam Noord, op loopafstand van het IJ-veer.
+      </p>
+      <p>
+        Wij werken uitsluitend met specialty koffie van kleinschalige
+        boerderijen en verse, ambachtelijke ingredienten. Elke dag gebakken,
+        nooit ingevroren.
+      </p>
     </div>
   </section>
 
@@ -445,42 +790,42 @@
             <div class="menu-item-name">Espresso</div>
             <div class="menu-item-desc">Dubbele shot, Ethiopische blend</div>
           </div>
-          <div class="menu-item-price">€ 2,80</div>
+          <div class="menu-item-price">EUR 2,80</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Cappuccino</div>
             <div class="menu-item-desc">Romige melkschuim, latte art</div>
           </div>
-          <div class="menu-item-price">€ 4,00</div>
+          <div class="menu-item-price">EUR 4,00</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Flat White</div>
             <div class="menu-item-desc">Double ristretto, zijdezacht</div>
           </div>
-          <div class="menu-item-price">€ 4,20</div>
+          <div class="menu-item-price">EUR 4,20</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Cold Brew</div>
             <div class="menu-item-desc">18 uur koud gebrouwen</div>
           </div>
-          <div class="menu-item-price">€ 4,50</div>
+          <div class="menu-item-price">EUR 4,50</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Chai Latte</div>
             <div class="menu-item-desc">Huisgemaakte chai siroop</div>
           </div>
-          <div class="menu-item-price">€ 4,20</div>
+          <div class="menu-item-price">EUR 4,20</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Verse Muntthee</div>
             <div class="menu-item-desc">Met honing</div>
           </div>
-          <div class="menu-item-price">€ 3,20</div>
+          <div class="menu-item-price">EUR 3,20</div>
         </div>
       </div>
 
@@ -491,42 +836,42 @@
             <div class="menu-item-name">Appeltaart</div>
             <div class="menu-item-desc">Met slagroom, opa's recept</div>
           </div>
-          <div class="menu-item-price">€ 4,50</div>
+          <div class="menu-item-price">EUR 4,50</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Kardemom Croissant</div>
             <div class="menu-item-desc">Gebakken in huis, elke ochtend</div>
           </div>
-          <div class="menu-item-price">€ 3,80</div>
+          <div class="menu-item-price">EUR 3,80</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Avocado Toast</div>
             <div class="menu-item-desc">Zuurdesem, feta, chilivlokken</div>
           </div>
-          <div class="menu-item-price">€ 9,50</div>
+          <div class="menu-item-price">EUR 9,50</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Granola Bowl</div>
             <div class="menu-item-desc">Yoghurt, seizoensfruit, honing</div>
           </div>
-          <div class="menu-item-price">€ 8,00</div>
+          <div class="menu-item-price">EUR 8,00</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Uitsmijter</div>
             <div class="menu-item-desc">Drie eieren, ham, Old Amsterdam</div>
           </div>
-          <div class="menu-item-price">€ 11,50</div>
+          <div class="menu-item-price">EUR 11,50</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Seizoenstaart</div>
             <div class="menu-item-desc">Vraag naar de taart van de dag</div>
           </div>
-          <div class="menu-item-price">€ 5,00</div>
+          <div class="menu-item-price">EUR 5,00</div>
         </div>
       </div>
 
@@ -537,21 +882,21 @@
             <div class="menu-item-name">Vers Sinaasappelsap</div>
             <div class="menu-item-desc">Per glas geperst</div>
           </div>
-          <div class="menu-item-price">€ 4,00</div>
+          <div class="menu-item-price">EUR 4,00</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Limonade Huismerk</div>
             <div class="menu-item-desc">Roos &amp; gember of citroen</div>
           </div>
-          <div class="menu-item-price">€ 3,50</div>
+          <div class="menu-item-price">EUR 3,50</div>
         </div>
         <div class="menu-item">
           <div class="menu-item-left">
             <div class="menu-item-name">Bruiswater</div>
             <div class="menu-item-desc">Groot of klein</div>
           </div>
-          <div class="menu-item-price">€ 2,50</div>
+          <div class="menu-item-price">EUR 2,50</div>
         </div>
       </div>
     </div>
@@ -566,43 +911,44 @@
       <div class="hours-table">
         <div class="hours-row">
           <span class="hours-day">Maandag</span>
-          <span class="hours-time">08:00 – 18:00</span>
+          <span class="hours-time">08:00 - 18:00</span>
         </div>
         <div class="hours-row">
           <span class="hours-day">Dinsdag</span>
-          <span class="hours-time">08:00 – 18:00</span>
+          <span class="hours-time">08:00 - 18:00</span>
         </div>
         <div class="hours-row">
           <span class="hours-day">Woensdag</span>
-          <span class="hours-time">08:00 – 18:00</span>
+          <span class="hours-time">08:00 - 18:00</span>
         </div>
         <div class="hours-row">
           <span class="hours-day">Donderdag</span>
-          <span class="hours-time">08:00 – 20:00</span>
+          <span class="hours-time">08:00 - 20:00</span>
         </div>
         <div class="hours-row">
           <span class="hours-day">Vrijdag</span>
-          <span class="hours-time">08:00 – 20:00</span>
+          <span class="hours-time">08:00 - 20:00</span>
         </div>
         <div class="hours-row">
           <span class="hours-day">Zaterdag</span>
-          <span class="hours-time">09:00 – 20:00</span>
+          <span class="hours-time">09:00 - 20:00</span>
         </div>
         <div class="hours-row">
           <span class="hours-day">Zondag</span>
-          <span class="hours-time">10:00 – 17:00</span>
+          <span class="hours-time">10:00 - 17:00</span>
         </div>
       </div>
 
       <div class="hours-note">
-        Op feestdagen kunnen de tijden afwijken. Volg ons op Instagram voor actuele informatie.
+        Op feestdagen kunnen de tijden afwijken. Volg ons op Instagram voor
+        actuele informatie.
       </div>
     </div>
 
     <div class="hours-image">
       <img
         src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80"
-        alt="Koffie bij Café Noord"
+        alt="Koffie bij Cafe Noord"
       />
     </div>
   </section>
@@ -637,14 +983,13 @@
         src="https://www.openstreetmap.org/export/embed.html?bbox=4.88,52.39,4.93,52.41&layer=mapnik&marker=52.400,4.905"
         allowfullscreen
         loading="lazy"
-        title="Locatie Café Noord"
+        title="Locatie Cafe Noord"
       ></iframe>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2024 <span>Café Noord</span> · Amsterdam · Alle rechten voorbehouden</p>
+    <p>&copy; 2024 <span>Cafe Noord</span> · Amsterdam · Alle rechten voorbehouden</p>
   </footer>
-
 </body>
 </html>
